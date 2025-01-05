@@ -1,0 +1,11 @@
+services:
+  site:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: site
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+      - /app/node_modules
