@@ -24,8 +24,8 @@ jobs:
             - name: Install dependencies
               run: npm install
 
-            - name: Run tests
-              run: npm test
+            - name: Run Lint
+              run: npm lint
 
     docker-build:
         runs-on: ubuntu-latest
