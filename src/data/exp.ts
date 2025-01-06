@@ -1,5 +1,7 @@
+import { BaseItem } from "@/data/base";
+
 // Define the type for experience data
-type ExperienceItem = BaseItem & {
+export type ExperienceItem = BaseItem & {
     company: string;
     location: string;
 };

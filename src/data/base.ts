@@ -1,4 +1,4 @@
-type BaseItem = {
+export type BaseItem = {
     title: string;
     description?: string;
     dates?: string;

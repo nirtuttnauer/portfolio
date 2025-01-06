@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { BaseItem } from "@/data/base";
 // SectionTitle Component
 export function SectionTitle({ title }: { title: string }) {
   return (
@@ -68,7 +69,7 @@ export function Cell({
   title,
   isProject,
 }: {
-  item: any;
+  item: BaseItem;
   title: string;
   isProject?: boolean;
 }) {
@@ -91,8 +92,8 @@ export function Cell({
       {/* Dates */}
       <CellDates
         dates={item?.dates}
-        startDate={item?.startDate}
-        endDate={item?.endDate}
+        startDate={item?.startDate?.toString()}
+        endDate={item?.endDate?.toString()}
       />
 
       {/* Description and Image Container */}

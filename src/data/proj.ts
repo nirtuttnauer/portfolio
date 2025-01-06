@@ -1,5 +1,7 @@
+import { BaseItem } from "@/data/base";
+
 // Define the type for project data
-type ProjectItem = BaseItem & {
+export type ProjectItem = BaseItem & {
   image?: string; // Only projects have images
 };
 
