@@ -3,8 +3,8 @@ export interface ExperienceItem {
   title: string;
   company: string;
   location: string;
-  startDate: Number;
-  endDate?: Number;
+  startDate: number;
+  endDate?: number;
   description: string;
   techStack: string;
 }
