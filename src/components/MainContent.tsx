@@ -3,7 +3,6 @@ import { About } from "./About";
 import Section from "./Section";
 import { experienceData } from "@/data/exp";
 import { Skills } from "./Skills";
-import GameOfLife from "./gameoflife";
 import { Resume } from "./Resume";
 import { Contact } from "./Contact";
 

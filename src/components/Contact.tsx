@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
+
 export const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -8,7 +9,7 @@ export const Contact = () => {
     message: '',
   });
 
-  const handleChange = (e : any) => {
+  const handleChange = (e : React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -16,7 +17,7 @@ export const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e : any) => {
+  const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     alert(`Thank you, ${formData.name}! Your message has been sent.`);
     setFormData({ name: '', email: '', message: '' });
@@ -27,13 +28,13 @@ export const Contact = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="flex flex-col items-center justify-center h-screen bg-gray-50 px-4"
+      className="flex flex-col items-center justify-center h-screen"
     >
       <motion.h1
         initial={{ scale: 0.8 }}
         animate={{ scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="text-3xl font-bold text-gray-800 mb-6"
+        className="text-3xl font-bold text-white mb-6"
       >
         Contact Me
       </motion.h1>

@@ -10,7 +10,7 @@ export default function DBG() {
   const gradientY = useTransform(mouseY, (y) => y - 150); // Offset by half of gradient height
 
   useEffect(() => {
-    const handleMouseMove = (event:any) => {
+    const handleMouseMove = (event:MouseEvent) => {
       mouseX.set(event.clientX);
       mouseY.set(event.clientY);
     };
@@ -30,7 +30,7 @@ export default function DBG() {
         translateY: gradientY,
       }}
     >
-      <div className="relative w-[300px] h-[300px] bg-gradient-to-r from-teal-400 via-blue-500 to-purple-500 rounded-full blur-3xl opacity-50">
+      <div className="relative w-[300px] h-[300px] bg-gradient-to-r from-teal-700 via-blue-500 to-purple-500 rounded-full blur-3xl opacity-50">
         {/* Outer glow */}
         <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-300 via-purple-400 to-pink-500 rounded-full blur-4xl opacity-40" />
         {/* Inner glow */}

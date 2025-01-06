@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { BaseItem } from "@/data/base";
+import { Item } from "@/data/base";
 // SectionTitle Component
 export function SectionTitle({ title }: { title: string }) {
   return (
@@ -67,11 +67,10 @@ export function CellTechnologies({
 export function Cell({
   item,
   title,
-  isProject,
 }: {
-  item: BaseItem;
+  //i want to use the BaseItem type from the base.ts file and all its children types
+  item: Item;
   title: string;
-  isProject?: boolean;
 }) {
   return (
     <motion.div
@@ -106,10 +105,10 @@ export function Cell({
         )}
 
         {/* Image Block */}
-        {isProject && item.image && (
+        {"image" in item && item?.image && (
           <div className="w-full md:w-1/3 flex-shrink-0">
             <Image
-              src={item.image}
+              src={item?.image}
               alt={item.title || "Project image"}
               layout="responsive"
               width={300}
@@ -136,10 +135,8 @@ export default function Section({
   data,
 }: {
   title: string;
-  data: any[];
+  data: Item[];
 }) {
-  const isProjectSection = title.toLowerCase() === "projects";
-
   return (
     <section id={title.toLowerCase()} className="py-20 px-10 md:px-20">
       {/* Section Title */}
@@ -151,7 +148,6 @@ export default function Section({
           key={index}
           item={item}
           title={item.title || title}
-          isProject={isProjectSection}
         />
       ))}
     </section>
