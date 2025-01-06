@@ -1,13 +1,7 @@
 // Define the type for project data
-export interface ProjectItem {
-  title: string;
-  description: string;
-  technologies: string;
-  githubLink?: string;
-  liveDemoLink?: string;
-  dates?: string;
-  image?: string;
-}
+type ProjectItem = BaseItem & {
+  image?: string; // Only projects have images
+};
 
 export const projectsData: ProjectItem[] = [
   {

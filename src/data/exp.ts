@@ -1,13 +1,8 @@
 // Define the type for experience data
-export interface ExperienceItem {
-  title: string;
-  company: string;
-  location: string;
-  startDate: number;
-  endDate?: number;
-  description: string;
-  techStack: string;
-}
+type ExperienceItem = BaseItem & {
+    company: string;
+    location: string;
+};
 
 export const experienceData: ExperienceItem[] = [
     {
