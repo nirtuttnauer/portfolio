@@ -1,40 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Nir Tuttnauer's portfolio
 
-## Getting Started
+A personal portfolio and blog built with the Next.js Pages Router, React,
+TypeScript, Tailwind CSS and Framer Motion. The home page assembles profile,
+skills, experience, project, contact and resume sections. Blog content is local
+Markdown stored in TypeScript, and Storybook provides component examples.
 
-First, run the development server:
+## Run locally
 
-```bash
+Use Node **22.23.3** (`.nvmrc`) and npm 10. Use npm and the committed
+`package-lock.json` for reproducible installs; the older `yarn.lock` is retained
+as historical project material and is not the lockfile used by CI.
+
+```sh
+git clone https://github.com/nirtuttnauer/portfolio.git
+cd portfolio
+# If you use nvm:
+nvm use
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open <http://localhost:3000>. No application environment variables or external
+backend are required for the current local pages. Development and production
+are separate commands:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```sh
+npm run build
+npm start
+```
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+`npm start` serves the existing production build, so run `build` first.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+## Edit content and components
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Location | What to edit |
+| --- | --- |
+| `src/pages/index.tsx` | Portfolio page and bundled local fonts |
+| `src/pages/blog.tsx` | Blog listing |
+| `src/pages/post/[slug].tsx` | Individual Markdown posts and missing-post state |
+| `src/data/posts.ts` | Post slugs, titles, author/date fields and Markdown |
+| `src/data/proj.ts`, `src/data/exp.ts` | Project and experience entries |
+| `src/components/` | Profile, navigation, cards, skills, contact, resume and animation components |
+| `src/stories/`, `.storybook/` | Component stories and Storybook configuration |
+| `src/styles/globals.css`, `tailwind.config.ts` | Shared styling and theme |
 
-## Learn More
+Post slugs must be unique URL segments, such as `storybook-for-react`. The
+regression tests check that the blog listing links to each configured post and
+that slugs are unique and valid.
 
-To learn more about Next.js, take a look at the following resources:
+## Verify changes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+```sh
+npm run lint
+npm test -- --ci --runInBand
+npm run build
+npm run build-storybook
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The pull-request CI runs a locked install and all four commands, including an
+actual production build. Jest uses Next.js's [built-in test configuration](https://nextjs.org/docs/pages/guides/testing/jest)
+for TypeScript, imports and font mocks; the tests render the blog on the server
+and do not need a browser. Lint and TypeScript build checks remain enabled.
 
-## Deploy on Vercel
+For interactive component development:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```sh
+npm run storybook
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+Open <http://localhost:6006>. `npm run build-storybook` creates the static
+`storybook-static/` directory. Building it does not publish it.
+
+## Current limits
+
+- The contact form shows a local alert and resets its fields; it does not send
+  email or save messages. Use the existing email/social links to contact Nir.
+- Project cards include placeholder images and authored sample entries. Review
+  their factual content before treating the site as an up-to-date resume.
+- `src/api/hello.ts` is outside `src/pages/api/`, so it is not a Pages Router API
+  endpoint. The current site has no implemented form-delivery backend.
+- Unit checks do not cover every component or replace browser accessibility and
+  interaction testing. Native deployment, Docker operation and delivery of
+  contact messages are not certified by CI.
+- The existing Docker files and CD workflow are retained; the npm workflow above
+  is the verified local path. No deployment or publication is performed by the
+  commands in this README.
+
+No project license file is included; contact the author for reuse terms.

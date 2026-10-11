@@ -1,38 +1,28 @@
 name: CI
-
 on:
   push:
-    branches:
-      - main
-      - dev
+    branches: [main, dev]
   pull_request:
-    branches:
-      - main
-      - dev
+    branches: [main, dev]
   workflow_dispatch:
-
+permissions:
+  contents: read
 jobs:
   build-lint-test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20] # Add more versions like [18, 20] if multi-version testing is needed
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm' # Automatically caches dependencies
-
-      - name: Install dependencies
-        run: npm i # Faster and more reliable than `npm install`
-
-      - name: Run Lint
-        run: npm run lint 
-
-      - name: Run Jest
-        run: npm run test
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Test
+        run: npm test -- --ci --runInBand
+      - name: Production build
+        run: npm run build
+      - name: Build Storybook
+        run: npm run build-storybook
