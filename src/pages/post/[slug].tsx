@@ -3,14 +3,6 @@ import Head from "next/head";
 import posts from "@/data/posts";
 import ReactMarkdown from "react-markdown";
 
-interface Post {
-  slug?: string;
-  title: string;
-  author: string;
-  date: string;
-  content: string;
-}
-
 // Blog Post Page
 export default function BlogPostPage() {
   const router = useRouter();
@@ -23,7 +15,7 @@ export default function BlogPostPage() {
       <div className="p-5">
         <h1 className="text-3xl">Post Not Found</h1>
         <p className="text-gray-600 mt-4">
-          The blog post you're looking for doesn't exist.
+          The blog post you&apos;re looking for doesn&apos;t exist.
         </p>
 
         {/* "Go Back" Button */}
